@@ -4,12 +4,11 @@ test-examples:
 	cd ./examples && find . -type f | xargs -i sh -c "go build {} && go clean" \;
 
 test-package:
-	go test .
+	go test . -v
 
 test: test-package test-examples
 
 release:
-	#$(MAKE) build
 	$(MAKE) test
 	git diff --quiet HEAD || (echo "--> Please first commit your work" && false)
 	./scripts/bump.sh ./version.go $(bump)
@@ -20,5 +19,5 @@ release:
 .PHONY: \
 	release \
 	test \
-  test-package \
-  test-examples
+	test-package \
+	test-examples

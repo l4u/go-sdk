@@ -1,6 +1,7 @@
 package transloadit
 
 import (
+	"fmt"
 	"testing"
 )
 
@@ -34,6 +35,7 @@ func TestListNotifications(t *testing.T) {
 func TestReplayNotification(t *testing.T) {
 	client := setup(t)
 
+	fmt.Println("Replaying Assembly", notificationAssemblyID)
 	err := client.ReplayNotification(ctx, notificationAssemblyID, "http://jsfiddle.net/echo/json/")
 	if err != nil {
 		t.Fatal(err)
